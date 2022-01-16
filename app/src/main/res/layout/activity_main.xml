@@ -19,10 +19,18 @@
     </Chronometer>
 
     <Button
-        android:id="@+id/start"
+        android:id="@+id/startBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/start"
+        android:layout_gravity="center"/>
+
+    <Button
+        android:id="@+id/stopBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stop"
+        android:enabled="false"
         android:layout_gravity="center"/>
 
 </LinearLayout>
