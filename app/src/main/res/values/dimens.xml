@@ -3,4 +3,6 @@
     <dimen name="linearLayout_padding">16dp</dimen>
     <dimen name="marginBottom">16dp</dimen>
     <dimen name="ChronometerTextSize">24sp</dimen>
+    <dimen name="margin">8dp</dimen>
+    <dimen name="horizontalMargin">8dp</dimen>
 </resources>
