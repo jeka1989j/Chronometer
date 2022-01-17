@@ -10,6 +10,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var chronometer: Chronometer
     private val elapsedTime = SystemClock.elapsedRealtime()
+    private var offset = 0L
+    var startTime = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,6 +19,12 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        chronometer = binding.chronometer
+
+        if (savedInstanceState != null) {
+            chronometer.base = savedInstanceState.getLong("chronometer")
+            chronometer.start()
+        }
 
         binding.startBtn.setOnClickListener {
             startTimer()
@@ -28,7 +36,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startTimer() {
-        chronometer = binding.chronometer
+//        chronometer.base = elapsedTime
         chronometer.start()
 
         binding.startBtn.isEnabled = false
@@ -36,9 +44,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun stopTimer() {
+        offset = elapsedTime - chronometer.base
         chronometer.stop()
 
         binding.stopBtn.isEnabled = false
         binding.startBtn.isEnabled = true
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putLong("chronometer", chronometer.base)
     }
 }
