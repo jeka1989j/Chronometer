@@ -9,8 +9,7 @@ import com.example.chronometer.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var chronometer: Chronometer
-    private val elapsedTime = SystemClock.elapsedRealtime()
-    private var offset = 0L
+    private var offset: Long = 0
     var startTime = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,20 +32,34 @@ class MainActivity : AppCompatActivity() {
         binding.stopBtn.setOnClickListener {
             stopTimer()
         }
+
+        binding.resetBtn.setOnClickListener {
+            resetTimer()
+        }
     }
 
     private fun startTimer() {
-//        chronometer.base = elapsedTime
+        chronometer.base = SystemClock.elapsedRealtime() - offset
         chronometer.start()
-
         binding.startBtn.isEnabled = false
         binding.stopBtn.isEnabled = true
+        binding.resetBtn.isEnabled = false
+        startTime = true
     }
 
     private fun stopTimer() {
-        offset = elapsedTime - chronometer.base
+        offset = SystemClock.elapsedRealtime() - chronometer.base
         chronometer.stop()
+        startTime = false
+        binding.stopBtn.isEnabled = false
+        binding.startBtn.isEnabled = true
+        binding.resetBtn.isEnabled = true
+    }
 
+    private fun resetTimer() {
+        offset = 0
+        chronometer.base = SystemClock.elapsedRealtime()
+        binding.resetBtn.isEnabled = false
         binding.stopBtn.isEnabled = false
         binding.startBtn.isEnabled = true
     }
