@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Chronometer</string>
-    <string name="chronometer_text">%d seconds passed since timer start</string>
     <string name="start">Start</string>
     <string name="stop">Stop</string>
     <string name="reset">reset</string>
